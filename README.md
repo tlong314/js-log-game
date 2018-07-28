@@ -11,7 +11,13 @@ If you want to add this game to your own webpage, store the script on your site 
 <script src="path/to/js-log-game.js"></script>
 ```
 
-Open the console to view instructions to start a game.
+Open the console to view instructions to start a game. Current games include:
+
+HANGMAN (a standard hangman game)
+
+ADVENTURE (a classic, text-based adventure game)
+
+DEFENDER (a basic, horizontal space shooter)
 
 ## License
 

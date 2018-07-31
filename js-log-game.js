@@ -178,6 +178,7 @@
 		Object.defineProperty(window, hangmanAnswer.trim().replace(/\s/g, "_"), {
 			get() {
 				console.clear();
+				drawAnswerSpaces();
 				console.log("That is correct! You win!");
 				console.log("Refresh the page to play again.");
 				hangmanGameWon = true;
@@ -448,7 +449,7 @@ const playConsoleTextAdventure = function() {
 				let item = itemAt(gameDetails.x, gameDetails.y);
 
 				if(item) {
-					console.log("You took the ", item);
+					console.log("You took the " + item);
 					gameDetails.inventory.push(item);
 					
 					if(item === "CATNIP") {
@@ -490,13 +491,12 @@ const playConsoleTextAdventure = function() {
 				}
 				else if(gameDetails.x === 1 && gameDetails.y === 1) {
 					console.log("You daydream about music for a\n" +
-									"second and ask who a chicken's favorite\n" +
-									"composer is. He says 'bok'.");
+									"second and ask who the chicken's favorite\n" +
+									"composer is. He says... 'bok'.");
 				}
 				else if(gameDetails.x === 0 && gameDetails.y === 2) {
-					console.log("You tell Fluffy you are lost. He says\n" +
-									"'ruff' and chases his tail.\n" +
-									"Is... is he... mocking you...?");
+					console.log("You call for Fluffy, but you don't\n" +
+									"see him anywhere. He's missing!");
 				}
 				else {
 					console.log("There is no one here, so... you are\n" +
@@ -733,7 +733,7 @@ const playConsoleTextAdventure = function() {
 	}
 
 	/**
-	 * @description Determins what item (if any) is currently available with the TAKE command.
+	 * @description Determines what item (if any) is currently available with the TAKE command.
 	 * @param {number} x - The current x-coordinate.
 	 * @param {number} y - The current y-coordinate.
 	 * @returns {string|null}
@@ -776,7 +776,7 @@ const playConsoleTextAdventure = function() {
 					"at a large wall to the WEST, blocking the path.";
 			case "02":
 				return "You are in a field. There is a wall to\n" +
-							"the EAST and a river to the SOUTH.\n" +
+							"the WEST and a river to the SOUTH.\n" +
 							"There is a road a little NORTH.";
 			case "10":
 				if(gameDetails.inventory.indexOf("CATNIP") === -1)
@@ -809,7 +809,7 @@ const playConsoleTextAdventure = function() {
 						"There is a lion growling on the porch!";
 				}
 			case "22":
-				if(gameDetails.inventory.indexOf("SHOVEL" === -1))
+				if(gameDetails.inventory.indexOf("SHOVEL") === -1)
 					return "You are by a large rock. Someone left\n" +
 						"a SHOVEL here. There is a cliff blocking the\n" +
 						"path to the EAST, and a river to the SOUTH.";
@@ -817,6 +817,10 @@ const playConsoleTextAdventure = function() {
 				if(!gameDetails.rockMoved)
 					return "You are by a river. A cliff is blocking the\n" +
 						"path to the EAST. There is a large rock here.";
+				else
+				if(gameDetails.rockMoved && gameDetails.inventory.indexOf("KEY") === -1)
+					return "You are by a river. A cliff is blocking the\n" +
+						"path to the EAST. There was a rock here once.";
 				else
 					return "You are by a river. A cliff is blocking the\n" +
 						"path to the EAST.";
